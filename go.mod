@@ -3,6 +3,7 @@ module github.com/crudGolangAPI
 go 1.22
 
 require (
+	github.com/go-chi/chi/v5 v5.0.12
 	github.com/go-chi/jwtauth v1.2.0
 	github.com/google/uuid v1.6.0
 	github.com/spf13/viper v1.18.2
@@ -20,6 +21,7 @@ require (
 require (
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
+	github.com/go-chi/chi v1.5.5
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
