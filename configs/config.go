@@ -2,13 +2,12 @@ package configs
 
 import (
 	"github.com/go-chi/jwtauth"
-	"github.com/spf13/viper"
 )
 
-type conf struct {
-	DbBDriver     string `mapstructure:"DB_DRIVER"`
+type config struct {
+	DBDriver      string `mapstructure:"DB_DRIVER"`
 	DBHost        string `mapstructure:"DB_HOST"`
-	DBPort        string `mapstructure:"DB_PORT"`
+	DBPort        int    `mapstructure:"DB_PORT"`
 	DBuser        string `mapstructure:"DB_USER"`
 	DBPassword    string `mapstructure:"DB_PASSWORD"`
 	DBName        string `mapstructure:"DB_NAME"`
@@ -18,26 +17,21 @@ type conf struct {
 	TokenAuth     *jwtauth.JWTAuth
 }
 
-func LoadConfig(path string) (*conf, error) {
-	var cfg *conf
+func LoadConfig() *config {
 
-	viper.SetConfigName("app_config")
-	viper.SetConfigType("env")
-	viper.AddConfigPath(path)
-	viper.SetConfigFile(".env")
-	viper.AutomaticEnv()
-
-	err := viper.ReadInConfig()
-	if err != nil {
-		panic(err)
+	cfg := &config{
+		DBDriver:      "mysql",
+		DBHost:        "localhost",
+		DBPort:        3306,
+		DBuser:        "root",
+		DBPassword:    "root",
+		DBName:        "dbApi",
+		WebServerPort: "8000",
+		JWTSecret:     "secret",
+		JWTExperesIn:  300,
 	}
 
-	err = viper.Unmarshal(&cfg)
-	if err != nil {
-		panic(err)
-	}
+	cfg.TokenAuth = jwtauth.New("HS256", []byte("secret"), nil)
 
-	cfg.TokenAuth = jwtauth.New("HS256", []byte(cfg.JWTSecret), nil)
-	return cfg, err
-
+	return cfg
 }
