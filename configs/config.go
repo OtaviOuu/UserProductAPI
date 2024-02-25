@@ -26,7 +26,7 @@ func LoadConfig() *config {
 		DBuser:        "root",
 		DBPassword:    "root",
 		DBName:        "dbApi",
-		WebServerPort: "8000",
+		WebServerPort: ":8000",
 		JWTSecret:     "secret",
 		JWTExperesIn:  300,
 	}
